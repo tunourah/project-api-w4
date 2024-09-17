@@ -1,12 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins");
 
-body {
+ 
+@import url('https://fonts.googleapis.com/css2?family=Sofadi+One&display=swap');
+ 
+body , nav {
   background-color: #f9f4ec;
   font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
 }
-
+.font {
+    font-family: "Sofadi One", system-ui;;
+}
 .wrapper {
   max-width: 400px;
   width: 100%;
@@ -122,3 +127,36 @@ body {
 .btn-logout:hover {
     background-color: #9d5452;  
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  }
+
+    
+     
+  
+    .cta {
+        
+            background: #000;
+            font-weight: 700;
+          
+            border-radius: 10px;
+            color: #fff;
+            pointer-events: auto;
+            cursor: pointer;
+            background: #e7e7e7;
+            border: none;
+            padding: 1rem ;
+            margin: 0;
+            font-family: inherit;
+            font-size: inherit;
+            position: relative;
+            display: inline-block;
+    }
+    .cta:hover {
+        background: #000;
+        color: #fff;
+        transition: all 0.3s;
+        transform: translateY(-3px); ;
+    }
+    
+   
+     
+  
+    
