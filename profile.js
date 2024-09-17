@@ -10,8 +10,8 @@ fetch("https://66e7e6b3b17821a9d9da6ff8.mockapi.io/login")
     .then((data) => {
         data.forEach((user) => {
         if (user.name && user.email) {
-            userName.textContent = user.name;
-            userEmail.textContent = user.email;
+            userName.textContent = " Name :"+ user.name;
+            userEmail.textContent = " Emai : "+ user.email;
 
         }
         });

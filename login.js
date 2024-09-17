@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loginForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
-       
+        
         emailError.textContent = '';
         passwordError.textContent = '';
 
@@ -22,30 +22,28 @@ document.addEventListener('DOMContentLoaded', function() {
             passwordError.textContent = 'Password is required';
         }
 
+       
         if (!emailError.textContent && !passwordError.textContent) {
-            fetch('https://66e7e6b3b17821a9d9da6ff8.mockapi.io/login', {
-                method: 'POST',
-                body: JSON.stringify({
-                    email: emailInput.value,
-                    password: passwordInput.value
-                }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
+           
+            fetch('https://66e7e6b3b17821a9d9da6ff8.mockapi.io/login')
             .then(response => {
                 if (!response.ok) throw new Error('Network response was not ok.');
                 return response.json();
             })
-            .then(data => {
+            .then(users => {
                 
-                const userId = data.id;
-                
-                
-                sessionStorage.setItem('userId', userId);
+                const user = users.find(user => 
+                    user.email === emailInput.value && user.password === passwordInput.value
+                );
 
-            
-                window.location.href = 'blog.html';
+                if (user) {
+                   
+                    sessionStorage.setItem('userId', user.id);
+                    window.location.href = 'blog.html';
+                } else {
+                     
+                    passwordError.textContent = 'Invalid email or password';
+                }
             })
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
@@ -53,10 +51,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+   
     function isValidEmail(email) {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return regex.test(email);
     }
 });
-
- 
