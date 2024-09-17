@@ -61,3 +61,57 @@ body {
 .none {
   display: none;
 }
+
+ 
+        
+.hero-section {
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    
+}
+
+.hero-content {
+    width: 100%;
+      margin: auto;
+     
+    padding: 20px;
+}
+
+.hero-image {
+    max-width: 50%;
+    height: auto;
+}
+
+
+.card-title {
+    font-size: 1.25rem;
+}
+
+@media (min-width: 768px) {
+    .hero-section {
+        flex-direction: row;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero-content h1 {
+        font-size: 3rem;
+        width: 100%;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .hero-content {
+        width: 50%;
+    }
+
+    .hero-section img {
+        height: auto;
+    }
+}
+ 

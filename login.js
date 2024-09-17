@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 sessionStorage.setItem('userId', userId);
 
             
-                window.location.href = 'home.html';
+                window.location.href = 'blog.html';
             })
             .catch(error => {
                 console.error('There was a problem with the fetch operation:', error);
