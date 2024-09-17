@@ -115,3 +115,10 @@ body {
     }
 }
  
+.btn-logout {
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-logout:hover {
+    background-color: #9d5452;  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  }

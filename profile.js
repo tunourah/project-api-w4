@@ -1,6 +1,7 @@
 
 const userName = document.getElementById("user-name");
 const userEmail = document.getElementById("user-email");
+const logout = document.getElementById("button-logout");
 
 fetch("https://66e7e6b3b17821a9d9da6ff8.mockapi.io/login")
     .then((response) => {
@@ -12,6 +13,24 @@ fetch("https://66e7e6b3b17821a9d9da6ff8.mockapi.io/login")
         if (user.name && user.email) {
             userName.textContent = " Name :"+ user.name;
             userEmail.textContent = " Emai : "+ user.email;
+            logout.textContent = "Logout";
+            logout.classList.add(
+                "btn", 
+                "btn-dark", 
+                "btn-md", 
+                "mt-3", 
+                "px-4",         
+                "py-2",       
+                "shadow-lg",    
+                "rounded-pill" 
+            ,"btn-logout"
+            );
+            
+
+            logout.addEventListener("click", function () {
+                sessionStorage.removeItem("userId");
+                window.location.href = "index.html";
+            })
 
         }
         });
