@@ -1,16 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins");
 
  
-@import url('https://fonts.googleapis.com/css2?family=Sofadi+One&display=swap');
- 
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
 body , nav {
   background-color: #f9f4ec;
   font-family: "Poppins", sans-serif;
   margin: 0;
+  font-family: "Inconsolata", monospace;
   padding: 0;
 }
 .font {
-    font-family: "Sofadi One", system-ui;;
+    font-family: "Inconsolata", monospace;
 }
 .wrapper {
   max-width: 400px;
