@@ -1,0 +1,67 @@
+body {
+    background-color: #F9F4EC;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+/* Fonts setup */
+@import url("https://fonts.googleapis.com/css2?family=Poppins");
+
+ 
+ 
+
+ 
+.wrapper {
+  max-width: 400px;
+  width: 100%;
+}
+
+.form-box h2 {
+  font-family: "AtkinsBold";
+}
+
+.form-box form .form-control {
+  font-size: 1em;
+  padding: 10px;
+  direction: rtl;
+}
+
+.btn {
+  border-radius: 50px;
+}
+
+.text-center a {
+  color: #162938;
+  text-decoration: underline;
+}
+
+.text-center a:hover {
+  text-decoration: none;
+}
+ 
+@media (max-width: 768px) {
+  header .navigation a {
+    margin-top: 10px;
+  }
+
+  .wrapper {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  header .logo {
+    font-size: 1.5rem;
+  }
+
+  .wrapper {
+    padding: 15px;
+  }
+
+  .form-box h2 {
+    font-size: 1.5em;
+  }
+}
+.none {
+    display: none;
+}
