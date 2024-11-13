@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
        
         if (!emailError.textContent && !passwordError.textContent) {
            
-            fetch('https://66e7e6b3b17821a9d9da6ff8.mockapi.io/login')
+            fetch('https://6735242a5995834c8a920079.mockapi.io/blog')
             .then(response => {
                 if (!response.ok) throw new Error('Network response was not ok.');
                 return response.json();

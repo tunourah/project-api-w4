@@ -3,9 +3,41 @@ const titleInput = document.getElementById("title-input");
 const contentInput = document.getElementById("content-input");
 const messageContainer = document.getElementById("message-container");
 const imageInput = document.getElementById("file-input");
+function resizeImage(file, maxWidth, maxHeight, callback) {
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+
+  reader.onload = function (event) {
+    const img = new Image();
+    img.src = event.target.result;
+
+    img.onload = function () {
+      const canvas = document.createElement("canvas");
+      let width = img.width;
+      let height = img.height;
+
+      if (width > maxWidth || height > maxHeight) {
+        if (width > height) {
+          height = Math.round((height * maxWidth) / width);
+          width = maxWidth;
+        } else {
+          width = Math.round((width * maxHeight) / height);
+          height = maxHeight;
+        }
+      }
+
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, width, height);
+
+      const resizedImage = canvas.toDataURL("image/jpeg", 0.7); // Adjust quality (0.7 for 70%)
+      callback(resizedImage);
+    };
+  };
+}
 
 publishButton.addEventListener("click", function () {
-  // Clear previous messages
   messageContainer.innerHTML = "";
 
   if (!titleInput.value.trim()) {
@@ -16,21 +48,23 @@ publishButton.addEventListener("click", function () {
     showMessage("Image is required", "text-danger");
   } else {
     const file = imageInput.files[0];
-    const reader = new FileReader();
 
-    reader.onloadend = function () {
-      const base64Image = reader.result;
+    resizeImage(file, 800, 800, function (resizedImage) {
+      // Retrieve the user ID from localStorage
+      const userId = localStorage.getItem("userId");
 
-      fetch("https://66e7e6b3b17821a9d9da6ff8.mockapi.io/login", {
+      // Include the user ID in the blog post data
+      fetch("https://6735242a5995834c8a920079.mockapi.io/blog", {
         method: "POST",
-        body: JSON.stringify({
-          title: titleInput.value,
-          content: contentInput.value,
-          image: base64Image,
-        }),
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+          userId: userId, // Add userId to the blog post data
+          title: titleInput.value,
+          content: contentInput.value,
+          image: resizedImage,
+        }),
       })
         .then((response) => {
           if (!response.ok) throw new Error("Network response was not ok.");
@@ -41,17 +75,18 @@ publishButton.addEventListener("click", function () {
           titleInput.value = "";
           contentInput.value = "";
           imageInput.value = "";
-          fetchPosts(); // Refresh posts after a successful publish
+          fetchPosts();
         })
         .catch((error) => {
           showMessage("There was a problem with the fetch operation.", "text-danger");
-          console.error("There was a problem with the fetch operation:", error);
+          console.error("Fetch error:", error);
         });
-    };
-
-    reader.readAsDataURL(file); // Converts file to base64 string
+    });
   }
 });
+
+
+
 
 function showMessage(message, className) {
   const p = document.createElement("p");
@@ -63,7 +98,7 @@ function showMessage(message, className) {
 function fetchPosts() {
   let container = document.getElementById("container");
 
-  fetch("https://66e7e6b3b17821a9d9da6ff8.mockapi.io/login")
+  fetch("https://6735242a5995834c8a920079.mockapi.io/blog")
     .then((response) => {
       if (!response.ok) throw new Error("Network response was not ok.");
       return response.json();
@@ -102,7 +137,7 @@ function fetchPosts() {
 
           deleteButton.addEventListener("click", function () {
             fetch(
-              `https://66e7e6b3b17821a9d9da6ff8.mockapi.io/login/${blog.id}`,
+              `https://6735242a5995834c8a920079.mockapi.io/blog/${blog.id}`,
               {
                 method: "DELETE",
               }

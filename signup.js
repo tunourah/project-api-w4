@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const confirmPasswordError = document.getElementById("confirmPasswordError");
     const termsError = document.getElementById("termsError");
   
-    const apiUrl = "https://66e7e6b3b17821a9d9da6ff8.mockapi.io/login";
+    const apiUrl = "https://6735242a5995834c8a920079.mockapi.io/blog";
   
     signupForm.addEventListener("submit", function (event) {
       event.preventDefault();

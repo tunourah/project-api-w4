@@ -13,7 +13,7 @@ function fetchUserData() {
     return;
   }
 
-  fetch(`https://66e7e6b3b17821a9d9da6ff8.mockapi.io/login/${userId}`)
+  fetch(`https://6735242a5995834c8a920079.mockapi.io/blog/${userId}`)
     .then((response) => {
       if (!response.ok) throw new Error("Network response was not ok.");
       return response.json();
@@ -54,16 +54,26 @@ function showMessage(message, className) {
 }
 
 function fetchPosts() {
+  const userId = sessionStorage.getItem("userId"); // Retrieve userId from sessionStorage
   let container = document.getElementById("container");
 
-  fetch("https://66e7e6b3b17821a9d9da6ff8.mockapi.io/login")
+  fetch("https://6735242a5995834c8a920079.mockapi.io/blog")
     .then((response) => {
       if (!response.ok) throw new Error("Network response was not ok.");
       return response.json();
     })
     .then((data) => {
       container.innerHTML = ""; // Clear previous posts
-      data.forEach((blog) => {
+
+      // Filter blogs to display only those created by the logged-in user
+      const userBlogs = data.filter((blog) => blog.userId === userId);
+
+      if (userBlogs.length === 0) {
+        showMessage("No blog posts found for this user", "text-warning");
+        return;
+      }
+
+      userBlogs.forEach((blog) => {
         if (blog.title || blog.content) {
           let card = document.createElement("div");
           let cardBody = document.createElement("div");
@@ -97,7 +107,7 @@ function fetchPosts() {
           container.appendChild(card);
 
           deleteButton.addEventListener("click", function () {
-            fetch(`https://66e7e6b3b17821a9d9da6ff8.mockapi.io/login/${blog.id}`, {
+            fetch(`https://6735242a5995834c8a920079.mockapi.io/blog/${blog.id}`, {
               method: "DELETE",
             })
               .then((response) => {
@@ -121,6 +131,7 @@ function fetchPosts() {
       console.error("There was a problem with the fetch operation:", error);
     });
 }
+
 
 // Call the function to fetch user data
 fetchUserData();
